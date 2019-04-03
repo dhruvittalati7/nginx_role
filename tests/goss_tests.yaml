@@ -1,16 +1,3 @@
-port:
-  tcp:80:
-    listening: true
-    ip:
-    - 0.0.0.0
-  tcp6:80:
-    listening: true
-    ip:
-    - '::'
-service:
+package:
   nginx:
-    enabled: true
-    running: true
-process:
-  nginx:
-    running: true
+    installed: true

@@ -11,9 +11,3 @@
   package:
     name: nginx
     state: present
-
-- name: Enable and start nginx
-  systemd:
-    name: nginx
-    state: started
-    enabled: yes
