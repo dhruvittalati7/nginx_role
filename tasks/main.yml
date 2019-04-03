@@ -18,7 +18,18 @@
     state: started
     enabled: yes
 
+- name: Install goss on remote
+  shell:
+    cmd: "curl -fsSL https://goss.rocks/install | sh"
+  args:
+    warn: false
+
+- name: Copy goss file
+  copy:
+    src: "{{ role_path }}/tests/goss_tests.yaml"
+    dest: /root/goss_tests.yaml
+
 - name: Test goss file
   local_action: goss
   args:
-    path: "{{ role_path }}/tests/goss_tests.yaml"
+    path: "/root/goss_tests.yaml"

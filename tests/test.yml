@@ -1,5 +1,27 @@
 ---
-- hosts: localhost
+- hosts: all
   remote_user: root
-  roles:
-    - nginx_role
+  tasks:
+    - name: Download goss on remote
+      get_url:
+        url: https://goss.rocks/install
+        dest: /root/goss.sh
+        mode: 0440
+
+    - name: Install goss
+      shell:
+        cmd: sh /root/goss.sh
+
+    - name: Copy goss file
+      copy:
+        src: "goss_tests.yaml"
+        dest: /root/goss_tests.yaml
+
+    - name: Test goss file
+      shell:
+        cmd: /usr/local/bin/goss --gossfile /root/goss_tests.yaml validate
+      register: goss_output
+
+    - name: Test results
+      debug:
+        msg: '{{ goss_output.stdout.split("\n") | replace("\n", " ") }}'
