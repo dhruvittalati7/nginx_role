@@ -7,6 +7,7 @@
         url: https://goss.rocks/install
         dest: /root/goss.sh
         mode: 0440
+        validate_certs: no
 
     - name: Install goss
       shell:
